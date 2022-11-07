@@ -1,0 +1,3 @@
+[submodule "src/main/native/scidown"]
+	path = src/main/native/scidown
+	url = https://github.com/radams15/scidown
