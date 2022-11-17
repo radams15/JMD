@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1eba4ea-fde4-4cb9-8016-2c9f4af93110" name="Changes" comment="Add dylibs to the git to enable Jenkins to build them.">
+    <list default="true" id="a1eba4ea-fde4-4cb9-8016-2c9f4af93110" name="Changes" comment="Disable GTK+ theme as this ruins the OSX version.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/OsxUiFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/JMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/JMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +90,7 @@
       <workItem from="1654615945704" duration="28000" />
       <workItem from="1668343758197" duration="793000" />
       <workItem from="1668346136960" duration="540000" />
-      <workItem from="1668681598056" duration="1600000" />
+      <workItem from="1668681598056" duration="2260000" />
     </task>
     <task id="LOCAL-00001" summary="Now remembers file save location, added OSXAdapter.">
       <created>1668682485894</created>
@@ -104,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668683033683</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Disable GTK+ theme as this ruins the OSX version.">
+      <created>1668683236830</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668683236830</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +136,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Now remembers file save location, added OSXAdapter." />
     <MESSAGE value="Add dylibs to the git to enable Jenkins to build them." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add dylibs to the git to enable Jenkins to build them." />
+    <MESSAGE value="Disable GTK+ theme as this ruins the OSX version." />
+    <option name="LAST_COMMIT_MESSAGE" value="Disable GTK+ theme as this ruins the OSX version." />
   </component>
 </project>

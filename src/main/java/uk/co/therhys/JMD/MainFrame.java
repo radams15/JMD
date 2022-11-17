@@ -18,6 +18,8 @@ public class MainFrame extends JFrame {
 
     private File currentFile;
 
+    private final boolean isOsx = (System.getProperty("os.name").toLowerCase().startsWith("mac os x"));
+
     private void saveToFile(File file){
         FileUtils.writeFile(file, mdEntry.getText());
     }
@@ -87,7 +89,7 @@ public class MainFrame extends JFrame {
     }
 
     private static JButton newToolButton(String title, String img, ActionListener listener) {
-        JButton btn = new JButton(title);
+        JButton btn = OsxUiFactory.getInstance().getUnifiedToolBtn(title);
 
         btn.setIcon(getIcon(img));
 
@@ -153,10 +155,9 @@ public class MainFrame extends JFrame {
     }
 
     MainFrame() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(OsxUiFactory.getInstance().getUnifiedToolbarPanel(new BorderLayout(0, 1)));
 
-        BorderLayout layout = new BorderLayout(0, 1);
-        getContentPane().setLayout(layout);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         initActions();
 
