@@ -138,6 +138,8 @@ public class MainFrame extends JFrame {
     private void initToolbar(JToolBar toolbar) {
         getContentPane().add(toolbar, BorderLayout.NORTH);
 
+        toolbar.setFloatable(false);
+
         toolbar.add(newToolButton("Save", "save.png", saveListener));
         toolbar.add(newToolButton("Open", "open.png", openListener));
         toolbar.add(newToolButton("Export", "export.png", exportListener));
