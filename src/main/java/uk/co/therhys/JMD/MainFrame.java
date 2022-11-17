@@ -1,12 +1,12 @@
 package uk.co.therhys.JMD;
 
-import cz.adamh.utils.NativeUtils;
+import apple.dts.samplecode.osxadapter.OSXAdapter;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.URL;
+import javax.swing.*;
 
 public class MainFrame extends JFrame {
     private final JLabel formattedOutput;
@@ -16,9 +16,13 @@ public class MainFrame extends JFrame {
     private ActionListener openListener;
     private ActionListener exportListener;
 
+    private ActionListener quitListener;
+
     private File currentFile;
 
     private final boolean isOsx = (System.getProperty("os.name").toLowerCase().startsWith("mac os x"));
+
+    private final int commandKey;
 
     private void saveToFile(File file){
         FileUtils.writeFile(file, mdEntry.getText());
@@ -72,7 +76,11 @@ public class MainFrame extends JFrame {
             }
         };
 
-        getRootPane().registerKeyboardAction(saveListener, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK, false), JComponent.WHEN_FOCUSED);
+        quitListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                parent.dispose();
+            }
+        };
     }
 
     private static ImageIcon getIcon(String img) {
@@ -105,16 +113,24 @@ public class MainFrame extends JFrame {
         JMenu fileMenu = new JMenu("File");
 
         JMenuItem saveMenu = fileMenu.add("Save");
-        saveMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        saveMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, commandKey));
         saveMenu.addActionListener(saveListener);
 
         JMenuItem openMenu = fileMenu.add("Open");
-        openMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        openMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, commandKey));
         openMenu.addActionListener(openListener);
 
         JMenuItem exportMenu = fileMenu.add("Export");
-        exportMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+        exportMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, commandKey));
         exportMenu.addActionListener(exportListener);
+
+        if(isOsx) {
+            OSXAdapter.setQuitHandler(this, quitListener);
+        } else {
+            JMenuItem exitMenu = fileMenu.add("Exit");
+            exitMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, commandKey));
+            exitMenu.addActionListener(quitListener);
+        }
 
         menuBar.add(fileMenu);
     }
@@ -156,6 +172,12 @@ public class MainFrame extends JFrame {
 
     MainFrame() {
         setContentPane(OsxUiFactory.getInstance().getUnifiedToolbarPanel(new BorderLayout(0, 1)));
+
+        if(isOsx){
+            commandKey = InputEvent.META_MASK;
+        }else{
+            commandKey = InputEvent.CTRL_MASK;
+        }
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 

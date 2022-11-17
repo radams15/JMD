@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1eba4ea-fde4-4cb9-8016-2c9f4af93110" name="Changes" comment="Disable GTK+ theme as this ruins the OSX version.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/OsxUiFactory.java" afterDir="false" />
+    <list default="true" id="a1eba4ea-fde4-4cb9-8016-2c9f4af93110" name="Changes" comment="Add OsxUiFactory to make OSX version look good.">
+      <change afterPath="$PROJECT_DIR$/makeapp.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/uk/co/therhys/JMD/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +30,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2A77WXHmrlHc6NrwvwWJofm87TL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -36,20 +41,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/mnt/share/scripts/java/JMD/src/main/resources",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/mnt/share/scripts/java/JMD/src/main/resources&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -90,7 +95,9 @@
       <workItem from="1654615945704" duration="28000" />
       <workItem from="1668343758197" duration="793000" />
       <workItem from="1668346136960" duration="540000" />
-      <workItem from="1668681598056" duration="2260000" />
+      <workItem from="1668681598056" duration="3253000" />
+      <workItem from="1668684876446" duration="109000" />
+      <workItem from="1668685028310" duration="1009000" />
     </task>
     <task id="LOCAL-00001" summary="Now remembers file save location, added OSXAdapter.">
       <created>1668682485894</created>
@@ -113,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668683236830</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add OsxUiFactory to make OSX version look good.">
+      <created>1668683885733</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668683885733</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +151,7 @@
     <MESSAGE value="Now remembers file save location, added OSXAdapter." />
     <MESSAGE value="Add dylibs to the git to enable Jenkins to build them." />
     <MESSAGE value="Disable GTK+ theme as this ruins the OSX version." />
-    <option name="LAST_COMMIT_MESSAGE" value="Disable GTK+ theme as this ruins the OSX version." />
+    <MESSAGE value="Add OsxUiFactory to make OSX version look good." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add OsxUiFactory to make OSX version look good." />
   </component>
 </project>
