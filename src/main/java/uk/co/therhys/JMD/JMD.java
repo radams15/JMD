@@ -19,9 +19,10 @@ public class JMD {
     }
 
     public static void main(String[] args){
-        if(! tryLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")) {
+        /*if(! tryLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")) {
             System.out.println("Using gtk theme");
-        }else if(! tryLookAndFeel(UIManager.getSystemLookAndFeelClassName())){
+        }else */
+        if(! tryLookAndFeel(UIManager.getSystemLookAndFeelClassName())){
             System.out.println("Using system theme");
         }else if(! tryLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())){
             System.out.println("Using cross platform theme");
