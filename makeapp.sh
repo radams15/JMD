@@ -12,7 +12,7 @@ cat << EOF > ${OUT}/Contents/MacOS/${NAME}
 
 DIR=/Applications/${OUT}
 
-java -Xdock:name="$NAME" -jar $$DIR/Contents/Resources/${NAME}.jar
+java -Xdock:name="$NAME" -jar \$DIR/Contents/Resources/${NAME}.jar
 EOF
 
 chmod +x ${OUT}/Contents/MacOS/${NAME}
