@@ -7,14 +7,18 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.URL;
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 
 public class MainFrame extends JFrame {
     private final JLabel formattedOutput;
     private final JTextArea mdEntry;
+    private final UndoManager undoManager;
 
     private ActionListener saveListener;
     private ActionListener openListener;
     private ActionListener exportListener;
+    private ActionListener undoListener;
+    private ActionListener redoListener;
 
     private ActionListener quitListener;
 
@@ -76,6 +80,18 @@ public class MainFrame extends JFrame {
             }
         };
 
+        undoListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                undoManager.undo();
+            }
+        };
+
+        redoListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                undoManager.redo();
+            }
+        };
+
         quitListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 parent.dispose();
@@ -123,6 +139,14 @@ public class MainFrame extends JFrame {
         JMenuItem exportMenu = fileMenu.add("Export");
         exportMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, commandKey));
         exportMenu.addActionListener(exportListener);
+
+        JMenuItem undoMenu = fileMenu.add("Undo");
+        undoMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, commandKey));
+        undoMenu.addActionListener(undoListener);
+
+        JMenuItem redoMenu = fileMenu.add("Redo");
+        redoMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, commandKey));
+        redoMenu.addActionListener(redoListener);
 
         if(isOsx) {
             OSXAdapter.setQuitHandler(this, quitListener);
@@ -187,6 +211,10 @@ public class MainFrame extends JFrame {
 
         formattedOutput = new JLabel();
         mdEntry = new JTextArea();
+
+        undoManager = new UndoManager();
+
+        mdEntry.getDocument().addUndoableEditListener(undoManager);
 
         JToolBar toolbar = new JToolBar();
         initToolbar(toolbar);
