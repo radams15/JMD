@@ -1,12 +1,9 @@
 package uk.co.therhys.JMD;
 
+import apple.dts.samplecode.osxadapter.OSXAdapter;
 import uk.co.therhys.MD.Converter;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class JMD {
     private static boolean tryLookAndFeel(String className){
@@ -22,9 +19,9 @@ public class JMD {
     }
 
     public static void main(String[] args){
-        /*if(! tryLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")) {
+        if(! tryLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")) {
             System.out.println("Using gtk theme");
-        }else */if(! tryLookAndFeel(UIManager.getSystemLookAndFeelClassName())){
+        }else if(! tryLookAndFeel(UIManager.getSystemLookAndFeelClassName())){
             System.out.println("Using system theme");
         }else if(! tryLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())){
             System.out.println("Using cross platform theme");
@@ -35,10 +32,11 @@ public class JMD {
         try{
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 			System.setProperty("com.apple.mrj.application.apple.menu.about.name", "JMD");
+
+            OSXAdapter.init();
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-
 
         new Converter();
 

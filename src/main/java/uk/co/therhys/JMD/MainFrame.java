@@ -1,12 +1,12 @@
 package uk.co.therhys.JMD;
 
+import cz.adamh.utils.NativeUtils;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.io.*;
+import java.net.URL;
 
 public class MainFrame extends JFrame {
     private final JLabel formattedOutput;
@@ -16,19 +16,28 @@ public class MainFrame extends JFrame {
     private ActionListener openListener;
     private ActionListener exportListener;
 
-    private void initActions(){
+    private File currentFile;
+
+    private void saveToFile(File file){
+        FileUtils.writeFile(file, mdEntry.getText());
+    }
+
+    private void initActions() {
         final MainFrame parent = this;
 
         saveListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                JFileChooser fileChooser = new JFileChooser();
+                if(currentFile != null) {
+                    saveToFile(currentFile);
+                } else {
+                    JFileChooser fileChooser = new JFileChooser();
 
-                int option = fileChooser.showSaveDialog(parent);
+                    int option = fileChooser.showSaveDialog(parent);
 
-                if(option == JFileChooser.APPROVE_OPTION){
-                    File file = fileChooser.getSelectedFile();
-
-                    FileUtils.writeFile(file, mdEntry.getText());
+                    if (option == JFileChooser.APPROVE_OPTION) {
+                        currentFile = fileChooser.getSelectedFile();
+                        saveToFile(currentFile);
+                    }
                 }
             }
         };
@@ -39,7 +48,7 @@ public class MainFrame extends JFrame {
 
                 int option = fileChooser.showSaveDialog(parent);
 
-                if(option == JFileChooser.APPROVE_OPTION){
+                if (option == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
 
                     FileUtils.writeFile(file, new Markdown(mdEntry.getText()).toHTML());
@@ -53,48 +62,70 @@ public class MainFrame extends JFrame {
 
                 int option = fileChooser.showSaveDialog(parent);
 
-                if(option == JFileChooser.APPROVE_OPTION){
-                    File file = fileChooser.getSelectedFile();
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    currentFile = fileChooser.getSelectedFile();
 
-                    mdEntry.setText(FileUtils.readFile(file));
+                    mdEntry.setText(FileUtils.readFile(currentFile));
                 }
             }
         };
+
+        getRootPane().registerKeyboardAction(saveListener, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK, false), JComponent.WHEN_FOCUSED);
     }
 
-    private static JButton newToolButton(String title, String img, ActionListener listener){
+    private static ImageIcon getIcon(String img) {
+        try {
+            URL url = ClassLoader.getSystemClassLoader().getResource(img);
+            if(url != null) {
+                return new ImageIcon(url);
+            }
+
+            return null;
+        } catch (Exception e) {
+            return new ImageIcon("src/main/resources/" + img);
+        }
+    }
+
+    private static JButton newToolButton(String title, String img, ActionListener listener) {
         JButton btn = new JButton(title);
 
-        btn.setIcon(new ImageIcon(img));
+        btn.setIcon(getIcon(img));
 
         btn.addActionListener(listener);
 
         return btn;
     }
 
-    private void initMenuBar(){
+    private void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
         JMenu fileMenu = new JMenu("File");
 
-        fileMenu.add("Save").addActionListener(saveListener);
+        JMenuItem saveMenu = fileMenu.add("Save");
+        saveMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        saveMenu.addActionListener(saveListener);
 
-        fileMenu.add("Open").addActionListener(openListener);
-        fileMenu.add("Export").addActionListener(exportListener);
+        JMenuItem openMenu = fileMenu.add("Open");
+        openMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        openMenu.addActionListener(openListener);
+
+        JMenuItem exportMenu = fileMenu.add("Export");
+        exportMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+        exportMenu.addActionListener(exportListener);
 
         menuBar.add(fileMenu);
     }
 
-    private void initToolbar(JToolBar toolbar){
+    private void initToolbar(JToolBar toolbar) {
         getContentPane().add(toolbar, BorderLayout.NORTH);
 
-        toolbar.add(newToolButton("Save", "src/main/resources/save.png", saveListener));
-        toolbar.add(newToolButton("Open", "src/main/resources/open.png", openListener));
-        toolbar.add(newToolButton("Export", "src/main/resources/open.png", exportListener));
+        toolbar.add(newToolButton("Save", "save.png", saveListener));
+        toolbar.add(newToolButton("Open", "open.png", openListener));
+        toolbar.add(newToolButton("Export", "export.png", exportListener));
     }
 
-    private void initMarkdown(){
+    private void initMarkdown() {
         JSplitPane mainContent = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
         mainContent.setDividerLocation(500);
@@ -121,7 +152,7 @@ public class MainFrame extends JFrame {
         getContentPane().add(mainContent, BorderLayout.CENTER);
     }
 
-    MainFrame(){
+    MainFrame() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         BorderLayout layout = new BorderLayout(0, 1);
